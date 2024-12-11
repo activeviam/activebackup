@@ -1,0 +1,83 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  continuation: circleci/continuation@1.0.0
+  cli: circleci/circleci-cli@0.1.9
+  git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
+
+parameters:
+  jira:
+    type: string
+    default: ""
+  continuous_release_workflow:
+    type: string
+    default: ""
+  # Cannot use boolean as it's not parsed properly by CircleCI.
+  pre_release:
+    type: string
+    default: "false"
+  previous_branch:
+    type: string
+    default: "6.0"
+  run_benchmark_workflow:
+    type: boolean
+    default: false
+  enforced_style:
+    type: boolean
+    default: false
+  run_tests:
+    type: boolean
+    default: false
+  run_check_workflow:
+    type: boolean
+    default: false
+  run_sonar:
+    type: boolean
+    default: false
+  run_atoti_python_api_ci:
+    type: boolean
+    default: false
+  run_preparation_workflow:
+    type: boolean
+    default: false
+
+jobs:
+  generate_orb:
+    docker:
+      - image: cimg/python:3.12.4
+    resource_class: small
+    steps:
+      - git-shallow-clone/checkout:
+          no_tags: true
+      - cli/install
+      - run:
+          name: Generate target config
+          command: |
+            # Install dependency to process YAML files
+            python3 -m pip install pyyaml==6.0.1
+            python3 .circleci/resources/build-ci-config.py .circleci/main.yml .circleci/generated_config.yml
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .circleci/generated_config.yml
+
+  run_real_pipeline:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: .
+      - continuation/continue:
+          configuration_path: .circleci/generated_config.yml
+
+workflows:
+  setup:
+    jobs:
+      - generate_orb
+      - run_real_pipeline:
+          requires:
+            - generate_orb
+
