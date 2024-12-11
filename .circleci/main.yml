@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   aws-s3: circleci/aws-s3@3.0.0 # Do not bump unless you made sure the benchmark upload still works
+  gcp-cli: circleci/gcp-cli@3.3.0
   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
   python: circleci/python@2.1.1
 

@@ -4,6 +4,7 @@ setup: true
 
 orbs:
   continuation: circleci/continuation@1.0.0
+  gcp-cli: circleci/gcp-cli@3.3.0
   cli: circleci/circleci-cli@0.1.9
   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
 
