@@ -51,3 +51,38 @@ commands:
               # only return the checksum
               cut -d ' ' -f 1)"
             echo "$CHECKSUM_CLI_SOURCE" | tee /tmp/atoti_javascript_cli.custom_lock
+
+    shallow_checkout:
+    steps:
+      - git-shallow-clone/checkout:
+          no_tags: true
+
+  install_ssh_credentials_artifacts_server:
+    description: Install credentials for server artifacts
+    steps:
+      - run:
+          name: Install SSH configuration for artifacts server
+          command: |
+            mkdir -p ~/.ssh
+            echo "Host ${ARTIFACTS_URL}" >> ~/.ssh/config
+            echo "  Hostname ${ARTIFACTS_URL}" >> ~/.ssh/config
+            echo "  User ${ARTIFACTS_USER}" >> ~/.ssh/config
+            echo "  Port ${ARTIFACTS_PORT}" >> ~/.ssh/config
+            echo "  BatchMode yes" >> ~/.ssh/config
+            echo "  HostKeyAlgorithms +ssh-rsa" >> ~/.ssh/config
+            echo "  PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
+      - run:
+          name: Recognize server fingerprint for security
+          command: echo "${ARTIFACTS_FINGERPRINT}" >> ~/.ssh/known_hosts
+
+  install_ssh_credentials_github:
+    description: Install credentials for Github
+    steps:
+      - run:
+          name: Add Github public key to known hosts
+          command: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+      - add_ssh_keys:
+          fingerprints:
+            - "e9:46:96:f7:9c:24:a3:ba:42:3c:e4:46:91:86:4b:01"
