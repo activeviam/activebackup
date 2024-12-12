@@ -1,0 +1,48 @@
+# We use a single .gitignore to centralize all the ignore patterns.
+# This also works best with Prettier's --ignore-path option (https://prettier.io/docs/en/cli.html#ignore-path).
+
+# Shared
+.cache/
+dist/
+lib/
+test-results/
+
+# CLI
+/atoti.js
+
+# Docker
+tmp/
+
+# JavaScript
+javascript/app/env.js
+node_modules/
+python/atoti-jupyterlab/labextension/
+tsconfig.tsbuildinfo
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Python
+.mypy_cache/
+__pycache__/
+python/**/__resources__/**/*.jar
+python/atoti-client/src/atoti/__resources__/app-extensions/
+python/atoti-client/src/atoti/__resources__/atoti-server-version.txt
+python/atoti-client/src/atoti/__resources__/tutorial
+python/atoti-client/src/atoti/_graphql_client
+python/atoti-client/graphql/schema.gql
+!python/atoti-client/tests_atoti/__resources__/config/extra_jar/test.jar
+python/atoti-server/src/_atoti_server/__resources__/community.lic
+python/docs/_static/report.pdf
+python/docs/api/
+python/docs/app-extension-template.zip
+python/docs/eula.rst
+python/docs/how_tos/__resources__/watch_local_files/current/sales_2021_05_03.csv
+python/test-utils/src/test_utils/__resources__/
+
+# Used to speed up `tsc --build` in packages only relying on TypeScript for type checking (e.g. transpilation/bundling delegated to other tools).
+.typescript-cache/
+
+# Additional "ignores" for Prettier
+.tool-versions
+.venv/
