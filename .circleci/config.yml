@@ -59,9 +59,6 @@ jobs:
     steps:
       - attach_workspace:
            at: workspace/echo-output
-
-      - setup_directquery_cloud_credentials
-
       - gcp-storage/upload:
             source_path: echo-output
             destination_bucket: backup_folder
