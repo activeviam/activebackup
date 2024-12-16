@@ -16,6 +16,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace
       - python/install-packages:
           pkg-manager: pip
       - python/install-packages:
@@ -34,6 +35,8 @@ jobs:
           command: find "$(pwd)"
       - persist_to_workspace:
           root: workspace
+          paths: 
+            - .
 
   use-gcp:
     executor: gcp-cli/default
@@ -48,8 +51,10 @@ jobs:
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - attach_workspace:
            at: workspace
+           path:
+           - .
       - gcp-storage/upload:
-            source_path: echo-output
+            source_path: workspace
             destination_bucket: backup_folder
             cache_control: public, max-age=86400
 
