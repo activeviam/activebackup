@@ -49,7 +49,7 @@ jobs:
   use-gcp:
     executor: gcp-cli/default
     steps:
-      -run:
+      - run:
           command: |
             gcloud components update
       - gcp-cli/setup:
