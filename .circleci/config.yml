@@ -16,7 +16,6 @@ commands:
           name: Write DirectQuery Cloud Credentials to a file
           command: |
             mkdir -p $HOME/{.aws,.google}
-            echo $DIRECTQUERY_AWS_CREDENTIALS | base64 --d > $HOME/.aws/direct-query-credentials
             echo $DIRECTQUERY_GCP_CREDENTIALS | base64 --d > $HOME/.google/direct-query-credentials
 
 jobs:
@@ -47,8 +46,14 @@ jobs:
           paths: 
             - echo-output
 
+  use-gcp:
+    executor: gcp-cli/default
+    steps:
+      - gcp-cli/setup:
+          version: 330.0.0
+
   push-public-folder:
-      executor: gcp-storage/google
+      executor: gcp-storage/default
       steps:
         - attach_workspace:
            at: workspace/echo-output
@@ -64,4 +69,5 @@ workflows:
   main:
     jobs:
       - build
+      - use-gcp
       - push-public-folder
