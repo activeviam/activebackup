@@ -16,7 +16,6 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
       - python/install-packages:
           pkg-manager: pip
       - python/install-packages:
@@ -35,8 +34,6 @@ jobs:
           command: find "$(pwd)"
       - persist_to_workspace:
           root: workspace
-          paths: 
-            - echo-output
 
   use-gcp:
     executor: gcp-cli/default
@@ -50,7 +47,7 @@ jobs:
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - attach_workspace:
-           at: workspace/echo-output
+           at: workspace
       - gcp-storage/upload:
             source_path: echo-output
             destination_bucket: backup_folder
