@@ -49,11 +49,13 @@ jobs:
   use-gcp:
     executor: gcp-cli/default
     steps:
-      - run:
-          command: |
-            gcloud components update
-      - gcp-cli/setup:
-          version: 330.0.0
+      - gcp-cli/install
+      - gcp-cli/initialize
+      - persist_to_workspace:
+          root: workspace
+          paths: 
+            - echo-output
+
 
   push-public-folder:
     executor: gcp-cli/default
