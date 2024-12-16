@@ -49,8 +49,8 @@ jobs:
   use-gcp:
     executor: gcp-cli/default
     steps:
-      - gcp-cli/install
-      - gcp-cli/initialize
+      - gcp-cli/setup:
+          version: 404.0.0
       - persist_to_workspace:
           root: workspace
           paths: 
