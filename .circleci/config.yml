@@ -49,6 +49,9 @@ jobs:
   use-gcp:
     executor: gcp-cli/default
     steps:
+      -run:
+          command: |
+            gcloud components update
       - gcp-cli/setup:
           version: 330.0.0
 
