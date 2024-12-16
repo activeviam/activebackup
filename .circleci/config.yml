@@ -49,11 +49,6 @@ jobs:
             echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-
-
-  push-public-folder:
-    executor: gcp-cli/default
-    steps:
       - attach_workspace:
            at: workspace/echo-output
       - gcp-storage/upload:
@@ -66,4 +61,3 @@ workflows:
     jobs:
       - build
       - use-gcp
-      - push-public-folder
