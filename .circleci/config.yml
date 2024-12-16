@@ -38,21 +38,9 @@ jobs:
             pytest --version
           name: Test
         
-    push-public-folder:
-      executor: gcp-storage/google
-      steps:
-        - checkout
-        - gcp-cli/initialize
-        - setup_directquery_cloud_credentials
-        - gcp-storage/upload:
-              source_path: public/*
-              destination_bucket: backupgithub
-              destination_prefix: public/
-              cache_control: public, max-age=86400
 
 workflows:
   main:
     jobs:
       - build
-      - push-public-folder
 
