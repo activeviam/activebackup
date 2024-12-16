@@ -15,7 +15,7 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - run: mkdir -p workspace/folder
+      - run: mkdir -p workspace
       - python/install-packages:
           pkg-manager: pip
       - python/install-packages:
@@ -35,7 +35,7 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths: 
-            - folder
+            - .
 
   use-gcp:
     executor: gcp-cli/default
@@ -51,9 +51,9 @@ jobs:
       - attach_workspace:
            at: workspace
            path:
-           - fodler
+           - .
       - gcp-storage/upload:
-            source_path: workspace/folder
+            source_path: workspace
             destination_bucket: backup_folder
             cache_control: public, max-age=86400
 
