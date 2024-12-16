@@ -53,7 +53,7 @@ jobs:
           version: 330.0.0
 
   push-public-folder:
-    executor: gcp-storage/default
+    executor: gcp-storage/ubuntu
     steps:
       - attach_workspace:
            at: workspace/echo-output
