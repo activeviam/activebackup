@@ -53,17 +53,17 @@ jobs:
           version: 330.0.0
 
   push-public-folder:
-      executor: gcp-storage/default
-      steps:
-        - attach_workspace:
+    executor: gcp-storage/default
+    steps:
+      - attach_workspace:
            at: workspace/echo-output
 
-        - setup_directquery_cloud_credentials
+      - setup_directquery_cloud_credentials
 
-        - gcp-storage/upload:
-              source_path: echo-output
-              destination_bucket: backup_folder
-              cache_control: public, max-age=86400
+      - gcp-storage/upload:
+            source_path: echo-output
+            destination_bucket: backup_folder
+            cache_control: public, max-age=86400
 
 workflows:
   main:
