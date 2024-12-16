@@ -24,6 +24,8 @@ jobs:
     executor: python/default
     steps:
       - checkout
+      - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
       - python/install-packages:
           pkg-manager: pip
       - python/install-packages:
@@ -37,10 +39,44 @@ jobs:
           command: |
             pytest --version
           name: Test
-        
+      - run:
+          name: Show all files
+          command: find "$(pwd)"
+
+
+      - persist_to_workspace:
+          root: workspace
+          paths: 
+            - echo-output
+
+    push-public-folder:
+      executor: gcp-storage/google
+      steps:
+        - attach_workspace:
+           at: /tmp/workspace
+
+        - run: |
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
+
+        - gcp-cli/initialize
+
+        - setup_directquery_cloud_credentials
+
+        - gcp-storage/upload:
+              source_path: public/*
+              destination_bucket: backupgithub
+              destination_prefix: public/
+              cache_control: public, max-age=86400
 
 workflows:
   main:
     jobs:
       - build
+      - push-public-folder
+        requires:
+          - build
 
