@@ -42,14 +42,12 @@ jobs:
       - run:
           name: Show all files
           command: find "$(pwd)"
-
-
       - persist_to_workspace:
           root: workspace
           paths: 
             - echo-output
 
-    push-public-folder:
+  push-public-folder:
       executor: gcp-storage/google
       steps:
         - attach_workspace:
@@ -70,6 +68,3 @@ workflows:
     jobs:
       - build
       - push-public-folder
-        requires:
-          - build
-
