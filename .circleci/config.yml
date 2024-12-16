@@ -51,16 +51,13 @@ jobs:
       executor: gcp-storage/google
       steps:
         - attach_workspace:
-           at: /tmp/workspac
-
-        - gcp-cli/initialize
+           at: workspace/echo-output
 
         - setup_directquery_cloud_credentials
 
         - gcp-storage/upload:
-              source_path: public/*
-              destination_bucket: backupgithub
-              destination_prefix: public/
+              source_path: echo-output
+              destination_bucket: backup_folder
               cache_control: public, max-age=86400
 
 workflows:
