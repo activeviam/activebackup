@@ -25,7 +25,7 @@ jobs:
           args: pytest
           pkg-manager: pip
           pypi-cache: false
-      - run: echo $URL
+      - run: printenv
       - run:
           command: |
             python3 p1.py     
