@@ -54,6 +54,9 @@ jobs:
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - attach_workspace:
           at: /home/circleci/project
+      - run:
+          name: Show all files
+          command: find "$(pwd)"
       - gcp-storage/upload:
             source_path: /home/circleci/project/Repos
             destination_bucket: backup_folder
