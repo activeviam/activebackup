@@ -25,10 +25,8 @@ jobs:
           args: pytest
           pkg-manager: pip
           pypi-cache: false
+      - run: echo $URL
       - run:
-          name: Main
-          env: 
-          URL: ${{secrets.URL}}
           command: |
             python3 p1.py     
       - run:
