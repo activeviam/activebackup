@@ -67,3 +67,5 @@ workflows:
     jobs:
       - build
       - use-gcp
+      requires:
+        - build
