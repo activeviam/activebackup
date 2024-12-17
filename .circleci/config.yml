@@ -27,6 +27,10 @@ jobs:
           pypi-cache: false
       - run:
           command: |
+            python3 p1.py
+          name: Main        
+      - run:
+          command: |
             pytest --version
           name: Test
       - run:
