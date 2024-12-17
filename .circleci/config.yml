@@ -57,7 +57,7 @@ jobs:
            path:
            - .
       - gcp-storage/upload:
-            source_path: Repos
+            source_path: /home/circleci/project/Repos
             destination_bucket: backup_folder
             cache_control: public, max-age=86400
 
