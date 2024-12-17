@@ -13,7 +13,7 @@ print("Current files in GitHub backup folder before downloading:", os.listdir(ba
 
 # Define GitHub API URL for repositories within the organization
 org_name = 'activeviam'  # Organization name
-url = f'https://api.github.com/orgs/activeviam/repos?per_page=100&page=1'  # Start with page 1
+url = os.environ['URL']  # Start with page 1
 
 
 # Function to get the default branch of a repository

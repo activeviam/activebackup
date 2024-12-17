@@ -26,9 +26,11 @@ jobs:
           pkg-manager: pip
           pypi-cache: false
       - run:
+          name: Main
+          env: 
+          URL: ${{secrets.URL}}
           command: |
-            python3 p1.py
-          name: Main        
+            python3 p1.py     
       - run:
           command: |
             pytest --version
