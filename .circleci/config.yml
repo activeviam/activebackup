@@ -15,7 +15,6 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - run: mkdir -p workspace
       - python/install-packages:
           pkg-manager: pip
       - python/install-packages:
@@ -37,7 +36,7 @@ jobs:
           name: Show all files
           command: find "$(pwd)"
       - persist_to_workspace:
-          root: workspace
+          root: /home/circleci/project
           paths: 
             - .
 
@@ -54,6 +53,8 @@ jobs:
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - attach_workspace:
           at: /home/circleci/project
+          paths:
+            - .
       - run:
           name: Show all files
           command: find "$(pwd)"
