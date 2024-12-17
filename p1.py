@@ -2,6 +2,8 @@ import requests
 import os
 import shutil
 
+backup_folder = 'Repos'
+
 # Ensure that the backup folder exists
 if not os.path.exists(backup_folder):
     os.makedirs(backup_folder)
