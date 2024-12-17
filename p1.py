@@ -11,6 +11,15 @@ if not os.path.exists(backup_folder):
 # List the contents of the backup folder to confirm access
 print("Current files in GitHub backup folder before downloading:", os.listdir(backup_folder))
 
+# Define GitHub API URL for repositories within the organization
+org_name = 'activeviam'  # Organization name
+url = f'https://api.github.com/orgs/{org_name}/repos?per_page=100&page=1'  # Start with page 1
+
+# Create headers for authentication using your token
+headers = {
+    'Authorization': f'token {token}'
+}
+
 # Function to get the default branch of a repository
 def get_default_branch(repo_name):
     repo_url = f'https://api.github.com/repos/{org_name}/{repo_name}'
