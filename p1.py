@@ -11,23 +11,16 @@ if not os.path.exists(backup_folder):
 # List the contents of the backup folder to confirm access
 print("Current files in GitHub backup folder before downloading:", os.listdir(backup_folder))
 
-# Set GitHub username and personal access token (PAT)
-username = 'Asifahmad-SDET'  # Your GitHub username
-token = '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' 
 
 # Define GitHub API URL for repositories within the organization
 org_name = 'activeviam'  # Organization name
 url = f'https://api.github.com/orgs/{org_name}/repos?per_page=100&page=1'  # Start with page 1
 
-# Create headers for authentication using your token
-headers = {
-    'Authorization': f'token {token}'
-}
 
 # Function to get the default branch of a repository
 def get_default_branch(repo_name):
     repo_url = f'https://api.github.com/repos/{org_name}/{repo_name}'
-    response = requests.get(repo_url, headers=headers)
+    response = requests.get(repo_url)
 
     if response.status_code == 200:
         repo_data = response.json()
@@ -56,7 +49,7 @@ def download_repo_zip(repo_name):
 
     # Download the zip file from GitHub
     print(f"Downloading {repo_name} from {zip_url}...")
-    response = requests.get(zip_url, headers=headers)
+    response = requests.get(zip_url)
 
     if response.status_code == 200:
         with open(zip_path, 'wb') as f:
@@ -71,7 +64,7 @@ def download_all_repos():
 
     while True:
         # Request for repositories via GitHub API
-        response = requests.get(url.replace("page=1", f"page={page}"), headers=headers)
+        response = requests.get(url.replace("page=1", f"page={page}"))
 
         # Check if the response is successful (status code 200)
         if response.status_code == 200:
