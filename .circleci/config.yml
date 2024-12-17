@@ -53,9 +53,7 @@ jobs:
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - attach_workspace:
-           root: workspace
-           path:
-           - .
+          at: /home/circleci/project
       - gcp-storage/upload:
             source_path: /home/circleci/project/Repos
             destination_bucket: backup_folder
