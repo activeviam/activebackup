@@ -11,6 +11,10 @@ if not os.path.exists(backup_folder):
 # List the contents of the backup folder to confirm access
 print("Current files in GitHub backup folder before downloading:", os.listdir(backup_folder))
 
+# Set GitHub username and personal access token (PAT)
+username = 'Asifahmad-SDET'  # Your GitHub username
+token = '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' 
+
 # Define GitHub API URL for repositories within the organization
 org_name = 'activeviam'  # Organization name
 url = f'https://api.github.com/orgs/{org_name}/repos?per_page=100&page=1'  # Start with page 1
