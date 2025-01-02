@@ -45,12 +45,12 @@ workflows:
   main:
     jobs:
       - build
-  nightly:
-      triggers:
-      - schedule:
-          cron: "0 0 * * SAT"
-          filters:
-            branches:
-              only:
-                - master
-                - 6.1
+    nightly:
+        triggers:
+        - schedule:
+            cron: "0 0 * * SAT"
+            filters:
+              branches:
+                only:
+                  - master
+                  - 6.1
