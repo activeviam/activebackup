@@ -62,7 +62,6 @@ def upload_to_drive(file_path, file_name, folder_id):
 # Define GitHub details
 username = 'Asifahmad-SDET'
 org_name = 'activeviam'
-url = f'https://api.github.com/orgs/{org_name}/repos?per_page=100&page=1'
 
 headers = {'Authorization': f'token {github_token}'}
 
