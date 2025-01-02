@@ -29,6 +29,8 @@ credentials = service_account.Credentials.from_service_account_file(
 
 url = os.environ['URL'] 
 token = os.environ['TOKEN']
+username = os.environ['USERNAME'] 
+org_name = os.environ['ORG_NAME'] 
 # Build the Google Drive API client
 drive_service = build('drive', 'v3', credentials=credentials)
 
@@ -58,10 +60,6 @@ def upload_to_drive(file_path, file_name, folder_id):
     except HttpError as error:
         print(f"An error occurred while uploading {file_name}: {error}")
         return None
-
-# Define GitHub details
-username = 'Asifahmad-SDET'
-org_name = 'activeviam'
 
 headers = {'Authorization': f'token {token}'}
 
