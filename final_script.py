@@ -28,7 +28,7 @@ credentials = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
 url = os.environ['URL'] 
-github_token = os.environ['TOKEN']
+token = os.environ['TOKEN']
 # Build the Google Drive API client
 drive_service = build('drive', 'v3', credentials=credentials)
 
@@ -63,7 +63,7 @@ def upload_to_drive(file_path, file_name, folder_id):
 username = 'Asifahmad-SDET'
 org_name = 'activeviam'
 
-headers = {'Authorization': f'token {github_token}'}
+headers = {'Authorization': f'token {token}'}
 
 def get_default_branch(repo_name):
     repo_url = f'https://api.github.com/repos/{org_name}/{repo_name}'
