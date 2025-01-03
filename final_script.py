@@ -22,9 +22,9 @@ SCOPES = [
 
 service_account = os.environ['SERVICE_ACCOUNT_DECODED']
 sa = eval(service_account)
-print (sa)
+
 # Authenticate using the service account for Google Drive
-credentials = service_account.Credentials.from_service_account_file(service_account, scopes=SCOPES)
+credentials = service_account.Credentials.from_service_account_file(sa, scopes=SCOPES)
 
 url = os.environ['URL'] 
 token = os.environ['TOKEN']
