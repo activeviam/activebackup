@@ -20,7 +20,7 @@ url = os.environ['URL']
 token = os.environ['TOKEN']
 username = os.environ['USERNAME'] 
 org_name = os.environ['ORG_NAME']
-SERVICE_ACCOUNT_FILE = os.environ['SERVICE_ACCOUNT_FILE']
+#SERVICE_ACCOUNT_FILE = os.environ['SERVICE_ACCOUNT_FILE']
 #scopes for Google Drive
 SCOPES = [
     'https://www.googleapis.com/auth/drive',
