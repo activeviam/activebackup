@@ -21,10 +21,10 @@ SCOPES = [
     'https://www.googleapis.com/auth/drive',
     'https://www.googleapis.com/auth/drive.metadata.readonly'
 ]
-saj= os.environ['SERVICE_ACCOUNT_JSON']
-service_account_info = json.loads(saj)
+
+service_account=os.environ['SERVICE_ACCOUNT_DECODED']
 # Authenticate using the service account for Google Drive
-credentials = service_account.Credentials.from_service_account_file(service_account_info, scopes=SCOPES)
+credentials = service_account.Credentials.from_service_account_file(service_account, scopes=SCOPES)
 
 url = os.environ['URL'] 
 token = os.environ['TOKEN']

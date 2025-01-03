@@ -15,6 +15,8 @@ jobs:
     executor: python/default
     steps:
       - checkout
+      - run:
+          command: echo $SERVICE_ACCOUNT | base64 --decode > SERVICE_ACCOUNT_DECODED
       - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
