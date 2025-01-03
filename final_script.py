@@ -22,7 +22,7 @@ SCOPES = [
 ]
 
 service_account_file = json.loads(os.environ['SERVICE_ACCOUNT_DECODED'])
-
+print (service_account_file.client_id)
 
 # Authenticate using the service account for Google Drive
 credentials = service_account.Credentials.from_service_account_file(service_account_file, scopes=SCOPES)
