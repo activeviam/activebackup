@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run:
           name: "Setup custom ENV variables"
-          command:  echo 'export SERVICE_ACCOUNT_DECODED="$(echo $SERVICE_ACCOUNT | base64 -d)"' >> $BASH_ENV
+          command:  echo 'export SERVICE_ACCOUNT_DECODED="$(echo $SERVICE_ACCOUNT | base64 -di)"' >> $BASH_ENV
       - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
