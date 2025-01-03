@@ -21,8 +21,8 @@ SCOPES = [
     'https://www.googleapis.com/auth/drive',
     'https://www.googleapis.com/auth/drive.metadata.readonly'
 ]
-
-service_account_info = json.loads(SERVICE_ACCOUNT_JSON)
+saj= os.environ['SERVICE_ACCOUNT_JSON']
+service_account_info = json.loads(saj)
 # Authenticate using the service account for Google Drive
 credentials = service_account.Credentials.from_service_account_file(service_account_info, scopes=SCOPES)
 
