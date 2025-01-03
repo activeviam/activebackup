@@ -15,11 +15,13 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - run: echo $PYTHONPATH
       - run:
           name: "echo an SERVICE_ACCOUNT_FILE, that is part of our context"
           command: |
-            echo $SERVICE_ACCOUNT_FILE    
+            echo $SERVICE_ACCOUNT_FILE
+      - run:
+          name: "Setup custom environment variables"
+          command: echo 'export SERVICE_ACCOUNT_FILE' >> "$BASH_ENV"
       - python/install-packages:
           pkg-manager: pip
       - python/install-packages:
