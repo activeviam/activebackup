@@ -16,7 +16,11 @@ from googleapiclient.discovery import build
 
 #the path to the service account JSON file for Google Drive
 # Path to Google service account JSON file
-
+url = os.environ['URL'] 
+token = os.environ['TOKEN']
+username = os.environ['USERNAME'] 
+org_name = os.environ['ORG_NAME']
+SERVICE_ACCOUNT_FILE = os.environ['SERVICE_ACCOUNT_FILE']
 #scopes for Google Drive
 SCOPES = [
     'https://www.googleapis.com/auth/drive',
@@ -27,10 +31,7 @@ SCOPES = [
 credentials = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
-url = os.environ['URL'] 
-token = os.environ['TOKEN']
-username = os.environ['USERNAME'] 
-org_name = os.environ['ORG_NAME'] 
+
 # Build the Google Drive API client
 drive_service = build('drive', 'v3', credentials=credentials)
 
