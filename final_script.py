@@ -9,6 +9,7 @@ Original file is located at
 
 import os
 import requests
+import json
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 from google.oauth2 import service_account
@@ -20,11 +21,11 @@ SCOPES = [
     'https://www.googleapis.com/auth/drive.metadata.readonly'
 ]
 
-service_account = os.environ['SERVICE_ACCOUNT_DECODED']
-sa = eval(service_account)
+service_account = json.loads(os.environ['SERVICE_ACCOUNT_DECODED'])
+
 
 # Authenticate using the service account for Google Drive
-credentials = service_account.Credentials.from_service_account_file(sa, scopes=SCOPES)
+credentials = service_account.Credentials.from_service_account_file(service_account, scopes=SCOPES)
 
 url = os.environ['URL'] 
 token = os.environ['TOKEN']
