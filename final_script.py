@@ -21,6 +21,7 @@ SCOPES = [
 ]
 
 service_account_file=os.environ['SERVICE_ACCOUNT_FILE']
+print (type(service_account_file))
 # Authenticate using the service account for Google Drive
 credentials = service_account.Credentials.from_service_account_file(service_account_file, scopes=SCOPES)
 
