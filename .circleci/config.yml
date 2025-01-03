@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo $SERVICE_ACCOUNT | base64 -di > SERVICE_ACCOUNT_DECODED
+          command: $SERVICE_ACCOUNT_DECODED = echo $SERVICE_ACCOUNT | base64 -di
       - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
