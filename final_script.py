@@ -8,7 +8,6 @@ Original file is located at
 """
 
 import os
-import json
 import requests
 import base64
 from googleapiclient.errors import HttpError
@@ -22,7 +21,8 @@ SCOPES = [
     'https://www.googleapis.com/auth/drive.metadata.readonly'
 ]
 
-service_account=os.environ['SERVICE_ACCOUNT']
+coded_string = os.environ['SERVICE_ACCOUNT']
+service_account= base64.b64decode(coded_string)
 # Authenticate using the service account for Google Drive
 credentials = service_account.Credentials.from_service_account_file(service_account, scopes=SCOPES)
 
