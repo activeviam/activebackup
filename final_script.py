@@ -9,7 +9,7 @@ Original file is located at
 
 import os
 import requests
-import json
+import tempfile
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 from google.oauth2 import service_account
@@ -21,10 +21,10 @@ SCOPES = [
     'https://www.googleapis.com/auth/drive.metadata.readonly'
 ]
 
-service_account_info = os.environ['SERVICE_ACCOUNT_DECODED']
-
-# Authenticate using the service account for Google Drive
-credentials = service_account.Credentials.from_service_account_file(service_account_info, scopes=SCOPES)
+with tempfile.NamedTemporaryFile('w+') as f:
+    f.write(os.environ['SERVICE_ACCOUNT_DECODED'])
+    f.flush()  # clears the internal buffer of the file
+    credentials = service_account.Credentials.from_service_account_file(f.name, scopes=SCOPES)
 
 url = os.environ['URL'] 
 token = os.environ['TOKEN']
