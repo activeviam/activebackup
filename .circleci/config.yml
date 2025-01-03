@@ -15,9 +15,6 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - run:
-          name: "Setup custom environment variables"
-          command: echo 'export SERVICE_ACCOUNT_FILE="SERVICE_ACCOUNT_FILE"' >> "$BASH_ENV"
       - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
