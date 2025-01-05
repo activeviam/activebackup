@@ -128,10 +128,10 @@ def download_all_repos(folder_id):
     return repo_count
 
 # Main execution
-ensure_folder_exists(FOLDER_ID)
+ensure_folder_exists(folder_id)
 
-repo_count = download_all_repos(FOLDER_ID)
+repo_count = download_all_repos(folder_id)
 
 print(f"\n--- Backup Complete ---")
 print(f"Total Repositories Uploaded: {repo_count}")
-print(f"Google Drive Folder Path: https://drive.google.com/drive/folders/{FOLDER_ID}")
+print(f"Google Drive Folder Path: https://drive.google.com/drive/folders/{folder_id}")
