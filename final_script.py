@@ -30,6 +30,8 @@ url = os.environ['URL']
 token = os.environ['TOKEN']
 username = os.environ['USR'] 
 org_name = os.environ['ORG_NAME'] 
+folder_id = os.environ['FOLDER_ID']
+
 # Build the Google Drive API client
 drive_service = build('drive', 'v3', credentials=credentials)
 
